@@ -14,6 +14,12 @@ let domino = [
 
 // Jugadores
 let players = ['player1', 'player2', 'player3', 'player4'];
+let name_players = [];
+
+name_players['player1'] = 'Jose Camacho';
+name_players['player2'] = 'Eduardo Romero';
+name_players['player3'] = 'Fabian Gonzalez';
+name_players['player4'] = 'Jose Luna';
 
 let playersDominoes = Array(); // Jugadores con sus fichas
 let numberGames = 0; //
@@ -197,7 +203,10 @@ function play() {
                             if (playersDominoes[players[i]].length === 0) {
                                 document.getElementById(players[i]).style.border = '5px solid green'
                                 document.getElementById(`${tab.top}-${tab.bottom}`).style.backgroundColor = 'green';
-                                alert(`Winner ${players[i]}`);
+                                //alert(`Winner ${players[i]}`);
+                                let message = `The Winner is ${name_players[players[i]]}`;
+                                document.getElementById('winner').innerHTML = message;
+                                document.getElementById('winner').removeAttribute('hidden');
                                 console.log(`Jugó - ${players[i]}`);
                                 console.log(`Winner ${players[i]}`);
                                 winner = 1;
@@ -213,7 +222,9 @@ function play() {
                 console.log(`Pasó - ${players[i]}`);
                 pasoGeneral++;
                 if (pasoGeneral === 4) {
-                    alert('Juego Cerrado No Hubo Ganador');
+                    let message = 'The game is finished tied';
+                    document.getElementById('error').innerHTML = message;
+                    document.getElementById('error').removeAttribute('hidden');
                     return false;
                 }
             } else {
