@@ -17,29 +17,42 @@
     <div class="container-fluid mt-3">
         <div class="row text-center">
             <div class="col-12 col-md-12 col-lg-12">
-            <button id="game" type="button" class="btn btn-outline-success">Jugar!</button>
-            <button id="reset" type="button" class="btn btn-outline-secondary">Reset</button>
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-12  col-md-6 col-lg-3 text-center" id="player1">
-
+                <button id="revolver" type="button" class="btn btn-outline-info">revolver</button>
+                <button id="game" type="button" class="btn btn-outline-success">Jugar!</button>
+                <button id="reset" type="button" class="btn btn-outline-secondary">Reset</button>
+            </div>
         </div>
 
-        <div class="col-12  col-md-6 col-lg-3 text-center" id="player2">
-
+        <div class="alert alert-success mt-3" role="alert" hidden>
+            A simple success alert with
+            <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+        </div>
+        <div id="error" class="alert alert-warning mt-3" role="alert" hidden>
+            A simple warning alert with
+            <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
         </div>
 
-        <div class="col-12  col-md-6 col-lg-3 text-center" id="player3">
+        <div class="row mt-3">
+            <div class="col-12  col-md-6 col-lg-3 text-center">
+                <h6>Jose Camacho</h6>
+                <div id="player1"></div>
+            </div>
 
+            <div class="col-12  col-md-6 col-lg-3 text-center">
+                <h6>Eduardo Romero</h6>
+                <div id="player2"></div>
+            </div>
+
+            <div class="col-12  col-md-6 col-lg-3 text-center">
+                <h6>Fabian Gonzalez</h6>
+                <div id="player3"></div>
+            </div>
+
+            <div class="col-12  col-md-6 col-lg-3 text-center">
+                <h6>José Luna</h6>
+                <div id="player4"></div>
+            </div>
         </div>
-
-        <div class="col-12  col-md-6 col-lg-3 text-center" id="player4">
-
-        </div>
-    </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
