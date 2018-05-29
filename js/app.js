@@ -213,7 +213,7 @@ function play() {
                 console.log(`Pasó - ${players[i]}`);
                 pasoGeneral++;
                 if (pasoGeneral === 4) {
-                    alert('No Hubo Ganador' + paso);
+                    alert('Juego Cerrado No Hubo Ganador');
                     return false;
                 }
             } else {
@@ -266,12 +266,12 @@ function init() {
                 intentos++;
                 play();
             }else{
-                let message = 'Para volver a jugar debe resetear el juego anterior';
+                let message = 'Para volver a jugar deben resetear el juego anterior';
                 document.getElementById('error').innerHTML = message;
                 document.getElementById('error').removeAttribute('hidden');
             }
         }else{
-            let message = 'Para poder jugar tiene que revolver el juego primero';
+            let message = 'Para poder jugar tienen que revolver el juego primero';
             document.getElementById('error').innerHTML = message;
             document.getElementById('error').removeAttribute('hidden');
         }
