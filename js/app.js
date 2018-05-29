@@ -1,6 +1,27 @@
-var intentos = 1;
+// var utilizada para que resetees el juego antes de volver a jugar
+let intentos = 1;
+
+// all dominoes
+let domino = [
+    { top: 0, bottom: 0 },
+    { top: 0, bottom: 1 }, { top: 1, bottom: 1 },
+    { top: 0, bottom: 2 }, { top: 1, bottom: 2 }, { top: 2, bottom: 2 },
+    { top: 0, bottom: 3 }, { top: 1, bottom: 3 }, { top: 2, bottom: 3 }, { top: 3, bottom: 3 },
+    { top: 0, bottom: 4 }, { top: 1, bottom: 4 }, { top: 2, bottom: 4 }, { top: 3, bottom: 4 }, { top: 4, bottom: 4 },
+    { top: 0, bottom: 5 }, { top: 1, bottom: 5 }, { top: 2, bottom: 5 }, { top: 3, bottom: 5 }, { top: 4, bottom: 5 }, { top: 5, bottom: 5 },
+    { top: 0, bottom: 6 }, { top: 1, bottom: 6 }, { top: 2, bottom: 6 }, { top: 3, bottom: 6 }, { top: 4, bottom: 6 }, { top: 5, bottom: 6 }, { top: 6, bottom: 6 }
+];
+
+// Jugadores
+let players = ['player1', 'player2', 'player3', 'player4'];
+
+let playersDominoes = Array(); // Jugadores con sus fichas
+let numberGames = 0; //
+let paso = 0; // variable para controlar el paso de un jugador
+let pasoGeneral = 0; // varible para controlar el pago de todos los jugadores
 
 
+// Funcion pila utilizada para controlar las fichas jugadas
 function stack() {
     var elements = [];
 
@@ -52,23 +73,6 @@ function stack() {
         console.log(elements);
     }
 }
-// all dominoes
-let domino = [
-    { top: 0, bottom: 0 },
-    { top: 0, bottom: 1 }, { top: 1, bottom: 1 },
-    { top: 0, bottom: 2 }, { top: 1, bottom: 2 }, { top: 2, bottom: 2 },
-    { top: 0, bottom: 3 }, { top: 1, bottom: 3 }, { top: 2, bottom: 3 }, { top: 3, bottom: 3 },
-    { top: 0, bottom: 4 }, { top: 1, bottom: 4 }, { top: 2, bottom: 4 }, { top: 3, bottom: 4 }, { top: 4, bottom: 4 },
-    { top: 0, bottom: 5 }, { top: 1, bottom: 5 }, { top: 2, bottom: 5 }, { top: 3, bottom: 5 }, { top: 4, bottom: 5 }, { top: 5, bottom: 5 },
-    { top: 0, bottom: 6 }, { top: 1, bottom: 6 }, { top: 2, bottom: 6 }, { top: 3, bottom: 6 }, { top: 4, bottom: 6 }, { top: 5, bottom: 6 }, { top: 6, bottom: 6 }
-];
-
-let players = ['player1', 'player2', 'player3', 'player4'];
-
-var playersDominoes = Array();
-var numberGames = 0;
-let paso = 0;
-let pasoGeneral = 0;
 
 //  Algoritmo Fisher-Yates
 Array.prototype.shuffle = function () {
@@ -101,21 +105,22 @@ function assignDominoes() {
 
 }
 
+// funcion para iniciar el juego
+
 function play() {
-    let play = new stack();
-    let placedDominoesLeft = new stack();
-    let placedDominoesRight = new stack();
-    let firstMove = true;
-    let games = 0;
-    let winner = 0;
+    let placedDominoesLeft = new stack(); // Controla los movimientos hacia la izquierda 
+    let placedDominoesRight = new stack(); // Controla los movimientos hacia la derecha
+    let firstMove = true; // varible utilizada para hacer el primer movimiento
+    let games = 0; // varible utilizada para controlar los juegos por jugador
+    let winner = 0; // varible para utilizada para controlar que se obtenga un ganador
 
     do {
-        for (let i = 0; i < players.length; i++) {
-            if (playersDominoes[players[i]].length > 0) {
+        for (let i = 0; i < players.length; i++) { // turno por jugador
+            if (playersDominoes[players[i]].length > 0) { // verificar que tenga fichas para jugar 
                 games = 0;
-                console.log(`----- Turno Jugador : ${players[i]} ------`);
-                console.log(playersDominoes[players[i]].length)
-                for (let j = 0; j < playersDominoes[players[i]].length; j++) {
+                //console.log(`----- Turno Jugador : ${players[i]} ------`);
+                //console.log(playersDominoes[players[i]].length)
+                for (let j = 0; j < playersDominoes[players[i]].length; j++) { // Fichas a colocar
                     if (games === 0) {
                         if (firstMove) {
                             let tab = playersDominoes[players[i]][j];
@@ -195,18 +200,7 @@ function play() {
                             }
                         }
                     }
-                    /* if(playersDominoes[players[i]].length === 0) {
-                        console.log(`Winner ${players[i]}`);
-                        winner = 1
-                        return false;
-                    } */
-
                 }
-                /* if(playersDominoes[players[i]].length === 0) {
-                    console.log(`Winner ${players[i]}`);
-                    winner = 1
-                    break;
-                } */
 
                 if (paso === 0) {
                     pasoGeneral++;
@@ -226,7 +220,7 @@ function play() {
 
 }
 
-
+// Mostrar en pantalla las fichas de los jugadores
 function showGame() {
     console.log('c')
     for (let j = 0; j < players.length; j++) {
@@ -246,9 +240,8 @@ function showGame() {
     }
 }
 
-//play();
 
-
+ // funcion iniciar
 function init() {
     // Barajar
     domino.shuffle();
