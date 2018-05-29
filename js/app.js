@@ -1,6 +1,9 @@
+var intentos = 1;
+
+
 function stack() {
     var elements = [];
- 
+
     this.add = add;
     this.pop = pop;
     this.getTopElement = getTopElement;
@@ -39,7 +42,7 @@ function stack() {
     function removeAll() {
         elements = [];
     }
-    
+
     // Regresará el tamaño de la pila (cuantos elementos hay en ella).
     function size() {
         return elements.length;
@@ -64,7 +67,8 @@ let players = ['player1', 'player2', 'player3', 'player4'];
 
 var playersDominoes = Array();
 var numberGames = 0;
-
+let paso = 0;
+let pasoGeneral = 0;
 
 //  Algoritmo Fisher-Yates
 Array.prototype.shuffle = function () {
@@ -104,7 +108,7 @@ function play() {
     let firstMove = true;
     let games = 0;
     let winner = 0;
-  
+
     do {
         for (let i = 0; i < players.length; i++) {
             if (playersDominoes[players[i]].length > 0) {
@@ -112,10 +116,10 @@ function play() {
                 console.log(`----- Turno Jugador : ${players[i]} ------`);
                 console.log(playersDominoes[players[i]].length)
                 for (let j = 0; j < playersDominoes[players[i]].length; j++) {
-                    if(games === 0){
+                    if (games === 0) {
                         if (firstMove) {
                             let tab = playersDominoes[players[i]][j];
-                           // console.log('-************ ficha a poner **************');
+                            // console.log('-************ ficha a poner **************');
                             //console.log(tab);
                             document.getElementById(`${tab.top}-${tab.bottom}`).style.backgroundColor = 'orange';
                             if (tab.top === 6 && tab.bottom === 6) {
@@ -133,10 +137,10 @@ function play() {
                             }
                         } else {
                             let tab = playersDominoes[players[i]][j];
-                           // console.log('-************ ficha a poner **************');
-                          //  console.log(tab);
-                           // console.log('-----------------------------------------')
-                           document.getElementById(`${tab.top}-${tab.bottom}`).style.backgroundColor = 'orange';
+                            // console.log('-************ ficha a poner **************');
+                            //  console.log(tab);
+                            // console.log('-----------------------------------------')
+                            document.getElementById(`${tab.top}-${tab.bottom}`).style.backgroundColor = 'orange';
                             if (tab.top === placedDominoesLeft.getTopElement()) {
                                 placedDominoesLeft.pop();
                                 placedDominoesLeft.pop();
@@ -144,9 +148,10 @@ function play() {
                                 placedDominoesLeft.add(tab.bottom);
                                 playersDominoes[players[i]].splice(j, 1);
                                 games = 1;
-                               // console.log(`----- Ultima Ficha Jugada Left : ${placedDominoesLeft.getBottomElement()}  : ${placedDominoesLeft.getTopElement()} ------`);
-                               document.getElementById(`${tab.top}-${tab.bottom}`).style.backgroundColor = 'blue';
-                               document.getElementById(`${tab.top}-${tab.bottom}`).innerHTML = ++numberGames;
+                                paso++;
+                                // console.log(`----- Ultima Ficha Jugada Left : ${placedDominoesLeft.getBottomElement()}  : ${placedDominoesLeft.getTopElement()} ------`);
+                                document.getElementById(`${tab.top}-${tab.bottom}`).style.backgroundColor = 'blue';
+                                document.getElementById(`${tab.top}-${tab.bottom}`).innerHTML = ++numberGames;
                             } else if (tab.bottom === placedDominoesLeft.getTopElement()) {
                                 placedDominoesLeft.pop();
                                 placedDominoesLeft.pop();
@@ -154,6 +159,7 @@ function play() {
                                 placedDominoesLeft.add(tab.top);
                                 playersDominoes[players[i]].splice(j, 1);
                                 games = 1;
+                                paso++;
                                 //console.log(`----- Ultima Ficha Jugada  Left: ${placedDominoesLeft.getBottomElement()}  : ${placedDominoesLeft.getTopElement()} ------`);
                                 document.getElementById(`${tab.top}-${tab.bottom}`).style.backgroundColor = 'blue';
                                 document.getElementById(`${tab.top}-${tab.bottom}`).innerHTML = ++numberGames;
@@ -163,6 +169,7 @@ function play() {
                                 placedDominoesRight.add(tab.bottom);
                                 playersDominoes[players[i]].splice(j, 1);
                                 games = 1;
+                                paso++;
                                 //console.log(`----- Ultima Ficha Jugada  Right: ${placedDominoesRight.getBottomElement()}  : ${placedDominoesRight.getTopElement()} ------`);
                                 document.getElementById(`${tab.top}-${tab.bottom}`).style.backgroundColor = 'blue';
                                 document.getElementById(`${tab.top}-${tab.bottom}`).innerHTML = ++numberGames;
@@ -173,55 +180,68 @@ function play() {
                                 placedDominoesRight.add(tab.top);
                                 playersDominoes[players[i]].splice(j, 1);
                                 games = 1;
+                                paso++;
                                 //console.log(`----- Ultima Ficha Jugada  Right b: ${placedDominoesRight.getBottomElement()}  : ${placedDominoesRight.getTopElement()} ------`);
                                 document.getElementById(`${tab.top}-${tab.bottom}`).style.backgroundColor = 'blue';
                                 document.getElementById(`${tab.top}-${tab.bottom}`).innerHTML = ++numberGames;
                             }
-    
-                            if(playersDominoes[players[i]].length === 0) {
+
+                            if (playersDominoes[players[i]].length === 0) {
                                 document.getElementById(players[i]).style.border = '5px solid green'
                                 document.getElementById(`${tab.top}-${tab.bottom}`).style.backgroundColor = 'green';
-                                console.log(`Winner ${players[i]}`);
+                                alert(`Winner ${players[i]}`);
                                 winner = 1;
-                                break;
+                                return false;
                             }
                         }
                     }
-                    if(playersDominoes[players[i]].length === 0) {
+                    /* if(playersDominoes[players[i]].length === 0) {
                         console.log(`Winner ${players[i]}`);
                         winner = 1
-                        break;
-                    }
-                    
+                        return false;
+                    } */
+
                 }
-                if(playersDominoes[players[i]].length === 0) {
+                /* if(playersDominoes[players[i]].length === 0) {
                     console.log(`Winner ${players[i]}`);
                     winner = 1
                     break;
+                } */
+
+                if (paso === 0) {
+                    pasoGeneral++;
+                    if (pasoGeneral === 4) {
+                        alert('No Hubo Ganador' + paso);
+                        return false;
+                    }
+                } else {
+                    paso--;
+                    pasoGeneral = 0;
+                    console.log(pasoGeneral);
                 }
             }
         }
     } while (winner != 1);
-    
+
 
 }
 
 
 function showGame() {
     console.log('c')
-    for(let j = 0;  j < players.length ; j++){
-        var content = `<h4>Jugador ${j+1}</h4> <table class="table table-dark">`;
+    for (let j = 0; j < players.length; j++) {
+        var content = `<h4>Jugador ${j + 1}</h4> <table class="table table-dark">`;
         console.log(playersDominoes[players[j]].length)
-        for(let i = 0 ; i < playersDominoes[players[j]].length; i++) {
+        for (let i = 0; i < playersDominoes[players[j]].length; i++) {
             content += `<tr>
                             <th id="${playersDominoes[players[j]][i].top}-${playersDominoes[players[j]][i].bottom}"></th>
                             <td>${playersDominoes[players[j]][i].top}</td>  
                             <td>|</td>
                             <td>${playersDominoes[players[j]][i].bottom}</td>
                         </tr>`
-            }
+        }
         content += `</table>`;
-       
+
         document.getElementById(players[j]).innerHTML = content;
     }
 }
@@ -240,10 +260,20 @@ function init() {
 
     showGame();
 
-    document.getElementById('game').addEventListener('click', play);
- 
+    document.getElementById('game').addEventListener('click', function(){
+        if(intentos === 1){
+            intentos++;
+            play();
+        }else{
+            alert('Para volver a jugar debe resetear el juego anterior');
+        }
+        
+    });
+    document.getElementById('reset').addEventListener('click', function() {
+        location.reload();
+    });
 
 }
 
-window.onload = init();  
+window.onload = init();
 
